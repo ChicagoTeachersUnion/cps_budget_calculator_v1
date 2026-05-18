@@ -32,7 +32,7 @@ def main():
 
     df_all_schools = df.copy()
 
-    df_all_schools = df_all_schools[["School Name","Projected Core Teacher Position Loss","100% Funding","Positions"]]
+    df_all_schools = df_all_schools[["School Name","Projected Core Teacher Position Loss","100% Funding","Positions 100%"]]
     df_all_schools.columns = ["School Name","Projected District-Funded Teacher Position Loss","Additional Revenue with 100% EBF Funding","Additional Positions with 100% EBF Funding"]
 
     # Set page configuration
@@ -53,7 +53,7 @@ def main():
     st.markdown(f"""<p>
 Chicago Public Schools' (CPS's) proposed budget could lead to a loss of {abs(df["Projected Core Teacher Position Loss"].sum()):,.0f} district-funded teacher positions.
 
-<b>State legislators have a choice to prevent this loss and add {df["Positions"].sum()-abs(df["Projected Core Teacher Position Loss"].sum()):,.0f} teacher positions</b> by supporting state legislation (HB5409 and SB3701) to fully fund Illinois' Evidence-Based Funding (EBF) formula for K-12 schools.
+<b>State legislators have a choice to prevent this loss and add {df["Positions 100%"].sum()-abs(df["Projected Core Teacher Position Loss"].sum()):,.0f} teacher positions</b> by supporting state legislation (HB5409 and SB3701) to fully fund Illinois' Evidence-Based Funding (EBF) formula for K-12 schools.
 
 We created this tool to help advocacy for State funding to stop CPS's proposed cuts. 
 
@@ -113,7 +113,7 @@ Look up your State legislative district, Chicago school board district, or your 
 
     df_selected_schools = df.copy()
 
-    df_selected_schools = df_selected_schools[["School Name","Projected Core Teacher Position Loss","100% Funding","Positions"]]
+    df_selected_schools = df_selected_schools[["School Name","Projected Core Teacher Position Loss","100% Funding","Positions 100%"]]
     df_selected_schools.columns = ["School Name","Projected District-Funded Teacher Position Loss","Additional Revenue with 100% EBF Funding","Additional Positions with 100% EBF Funding"]
 
     df = df[["School Name", "Projected Core Teacher Position Loss"]]
@@ -140,7 +140,7 @@ Look up your State legislative district, Chicago school board district, or your 
     </p>
     <h4 style="margin-top:0.5rem; margin-bottom:0.25rem;">{text_ebf} {district} were fully funded?</h4>
     <p style="margin-top:0;">
-    No positions would be lost and there could be {str(int(df_ebf["Positions"].sum())-abs(sum(x for x in df['Projected Core Teacher Position Loss'] if x < 0)))} <b>additional</b> positions.
+    No positions would be lost and there could be {str(int(df_ebf["Positions 100%"].sum())-abs(sum(x for x in df['Projected Core Teacher Position Loss'] if x < 0)))} <b>additional</b> positions.
     </p>
     """, unsafe_allow_html=True)
 
@@ -153,7 +153,7 @@ Look up your State legislative district, Chicago school board district, or your 
         </p>
         <h4 style="margin-top:0.5rem; margin-bottom:0.25rem;">How will a fully funded EBF impact {district}?</h4>
         <p style="margin-top:0;">
-        No positions would be lost and there could be {str(int(df_ebf["Positions"].sum())-abs(sum(x for x in df['Projected Core Teacher Position Loss'] if x < 0)))} <b>additional</b> positions.
+        No positions would be lost and there could be {str(int(df_ebf["Positions 100%"].sum())-abs(sum(x for x in df['Projected Core Teacher Position Loss'] if x < 0)))} <b>additional</b> positions.
         </p>""", unsafe_allow_html=True)
 
     if select_by == "School" and district is not None and sum(x for x in df['Projected Core Teacher Position Loss'] if x < 0) >= 0:
@@ -165,7 +165,7 @@ Look up your State legislative district, Chicago school board district, or your 
         </p>
         <h4 style="margin-top:0.5rem; margin-bottom:0.25rem;">How will a fully funded EBF impact {district}?</h4>
         <p style="margin-top:0;">
-        While no positions will be lost, a fully funded EBF would bring {str(int(df_ebf["Positions"].sum())-abs(sum(x for x in df['Projected Core Teacher Position Loss'] if x < 0)))} <b>additional</b> positions.
+        While no positions will be lost, a fully funded EBF would bring {str(int(df_ebf["Positions 100%"].sum())-abs(sum(x for x in df['Projected Core Teacher Position Loss'] if x < 0)))} <b>additional</b> positions.
         </p>""", unsafe_allow_html=True)
 
     if 'table_button' not in st.session_state:
@@ -210,7 +210,7 @@ Another choice is possible. We can increase revenue from the State, but only if 
 
 <b>State legislators have a choice to stop these CPS cuts by supporting state legislation (HB5409 and SB3701) to fully fund Illinois' Evidence-Based Funding (EBF) for K–12 schools.</b>
 
-If passed, this funding could add about {df_download["Positions"].sum()-abs(df_download["Projected Core Teacher Position Loss"].sum()):,.0f} more teacher positions while preventing the expected loss of {abs(df_download["Projected Core Teacher Position Loss"].sum()):,.0f} district-funded teachers.
+If passed, this funding could add about {df_download["Positions 100%"].sum()-abs(df_download["Projected Core Teacher Position Loss"].sum()):,.0f} more teacher positions while preventing the expected loss of {abs(df_download["Projected Core Teacher Position Loss"].sum()):,.0f} district-funded teachers.
 
 <b>Data</b>
 
@@ -232,7 +232,7 @@ Evidence-Based Funding (EBF) revenue allocates the total EBF adequacy gap based 
     st.download_button(
         label="Download Full Dataset",
         data=buffer,
-        file_name=f"set_data_dowloaded_{pd.Timestamp.now().strftime('%Y-%m-%d')}.xlsx",
+        file_name=f"data_dowloaded_{pd.Timestamp.now().strftime('%Y-%m-%d')}.xlsx",
         mime="application/vnd.ms-excel",
         icon=":material/download:"
     )
