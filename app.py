@@ -53,7 +53,7 @@ def main():
     st.markdown(f"""<p>
 Chicago Public Schools' (CPS's) proposed budget could lead to a loss of {abs(df["Projected Core Teacher Position Loss"].sum()):,.0f} district-funded teacher positions.
 
-<b>State legislators have a choice to prevent this loss and add {df["Positions 100%"].sum()-abs(df["Projected Core Teacher Position Loss"].sum()):,.0f} teacher positions</b> by supporting state legislation (HB5409 and SB3701) to fully fund Illinois' Evidence-Based Funding (EBF) formula for K-12 schools. We can fund EBF by [taxing billionaire wealth and Illinois' richest corproations and residents](https://www.illinoisrevenuealliance.org/advocacy/). 
+<b>State legislators have a choice to prevent this loss and add {df["Positions 100%"].sum()-abs(df["Projected Core Teacher Position Loss"].sum()):,.0f} teacher positions</b> by supporting state legislation (HB5409 and SB3701) to fully fund Illinois' Evidence-Based Funding (EBF) formula for K-12 schools. We can fund EBF by [taxing billionaire wealth and Illinois' richest corporations and residents](https://www.illinoisrevenuealliance.org/advocacy/). 
 
 We created this tool to help advocacy for State funding to stop CPS's proposed cuts. 
 
