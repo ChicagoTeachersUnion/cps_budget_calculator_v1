@@ -84,6 +84,7 @@ Look up your State legislative district, Chicago school board district, or your 
             df = df[df["Rep"].isin([rep])]
         text_loss = "How will CPS's budget impact State Representive District "
         text_ebf = "What if schools in State Representive District "
+        text_table = "Data for State Representive District "
     elif select_by == "State Senator District":
         sen = st.selectbox("Select Illinois State Senator District:", options=sen_list,index=None, placeholder="Select a district")
         district = sen
@@ -91,6 +92,7 @@ Look up your State legislative district, Chicago school board district, or your 
             df = df[df["Senate"].isin([sen])]
         text_loss = "How will CPS's budget impact State Senate District "
         text_ebf = "What if schools in State Senate District "
+        text_table = "Data for State Senate District "
     elif select_by == "Chicago School Board District":
         ersb = st.selectbox("Select Chicago Chicago School Board District:", options=ersb_list,index=None, placeholder="Select a district")
         district = ersb
@@ -98,6 +100,7 @@ Look up your State legislative district, Chicago school board district, or your 
             df = df[df["ERSB"].isin([ersb])]
         text_loss = "How will CPS's budget impact Chicago School Board District "
         text_ebf = "What if schools in Chicago School Board District "
+        text_table = "Data for School Board District "
     elif select_by == "School":
         school = st.selectbox("Select School:", options=school_list,index=None, placeholder="Select a school")
         district = school
@@ -179,9 +182,11 @@ Look up your State legislative district, Chicago school board district, or your 
     <p style="margin-top:0; margin-bottom:0.75rem;"><i><span style="color:#878787;">Select a district or school to see table.</span></i></p>
     """, unsafe_allow_html=True)
         elif district is not None and select_by == "School":
+            st.markdown(f"""<h4>Data for All Schools</h2>""",unsafe_allow_html=True)
             st.dataframe(df_all_schools,hide_index=True)
 
-        elif district is not None and select_by != "Schoos":
+        elif district is not None and select_by != "School":
+            st.markdown(f"""<h4>{text_table} {district}</h2>""",unsafe_allow_html=True)
             st.dataframe(df_selected_schools,hide_index=True)
 
     if 'button' not in st.session_state:
@@ -190,7 +195,7 @@ Look up your State legislative district, Chicago school board district, or your 
     def click_button():
         st.session_state.button = not st.session_state.button
 
-    st.button('Click here to learn more about how the budget process and our data', on_click=click_button)
+    st.button('Click here for more context and to learn about our data', on_click=click_button)
 
     if st.session_state.button:
         st.markdown(f"""<p>
