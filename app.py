@@ -59,8 +59,7 @@ Look up your State legislative district, Chicago school board district, or schoo
     sen_list = df["Senate"].unique()
     sen_list.sort()
     ersb_list = ersb_list = sorted(df["ERSB"].dropna().unique().tolist())
-    school_list = df["School Name"].unique()
-    school_list.sort()
+    school_list = sorted(df["School Name"].dropna().unique().tolist())
 
     grouped_rep = df.groupby("Rep")["Projected Core Teacher Position Loss"].sum().reset_index()
     grouped_sen = df.groupby("Senate")["Projected Core Teacher Position Loss"].sum().reset_index()
