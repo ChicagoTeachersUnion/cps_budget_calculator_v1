@@ -58,8 +58,7 @@ Look up your State legislative district, Chicago school board district, or schoo
     rep_list.sort()
     sen_list = df["Senate"].unique()
     sen_list.sort()
-    ersb_list = df["ERSB"].unique()
-    ersb_list.sort()
+    ersb_list = ersb_list = sorted(df["ERSB"].dropna().unique().tolist())
     school_list = df["School Name"].unique()
     school_list.sort()
 
