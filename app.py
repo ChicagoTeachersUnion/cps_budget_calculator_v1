@@ -174,8 +174,9 @@ Look up your State legislative district, Chicago school board district, or your 
     def click_table_button():
         st.session_state.table_button = not st.session_state.table_button
 
-    st.button('Click here to see the school level data', on_click=click_table_button)
-
+    st.markdown("""<p><b>Want to see the school-level data?</b></p>""",unsafe_allow_html=True)
+    st.button('Click here', on_click=click_table_button,key="data_button")
+    
     if st.session_state.table_button:
         if district is None:
             st.markdown(f"""
@@ -195,7 +196,8 @@ Look up your State legislative district, Chicago school board district, or your 
     def click_button():
         st.session_state.button = not st.session_state.button
 
-    st.button('Click here for more context and to learn about our data', on_click=click_button)
+    st.markdown("""<p><b>Interested in so more context and to learn about our data?</b></p>""",unsafe_allow_html=True)
+    st.button('Click here', on_click=click_button,key="context_button")
 
     if st.session_state.button:
         st.markdown(f"""<p>
