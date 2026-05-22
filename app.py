@@ -457,7 +457,7 @@ Look up your State legislative district, Chicago school board district, or your 
         st.download_button(
             label="Download One-Pager",
             data=html_one_pager,
-            file_name=f"one_pager_{safe_district}_{download_date}.html",
+            file_name=f"{safe_district}_Fact_Sheet_{download_date}.html",
             mime="text/html",
             icon=":material/download:"
         )
